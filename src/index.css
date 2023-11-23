@@ -1,13 +1,193 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: #e2e2e2;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.invoice-conatiner {
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+svg {
+  position: fixed;
+  top: 10px;
+  left: -150px;
+  z-index: -1;
+}
+
+.container {
+  width: 60%;
+  height: 100%;
+  background: #FFF;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+
+h2 {
+  padding: 40px;
+  font-weight: lighter;
+  text-transform: uppercase;
+  color: #414141;
+}
+
+h5 {
+  padding: 40px;
+  font-weight: lighter;
+  color: #414141;
+}
+
+input {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  width: 250px;
+  height: 60px;
+  margin-top: -10px;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-transition: .5s;
+  transition: .5s;
+
+  &:nth-of-type(1) {
+    background: #673ab7;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+}
+
+.register {
+  margin-bottom: 35px !important;
+}
+
+.reg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  -webkit-transform: translateY(-100%) scale(1);
+  transform: translateY(-100%) scale(1);
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  background: #673ab7;
+  z-index: 5;
+  -webkit-transition: .8s ease-in-out;
+  transition: .8s ease-in-out;
+}
+
+h3 {
+  position: absolute;
+  top: -100%;
+  left: 20%;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: rgba(255, 255, 255, .3);
+  -webkit-transition: .3s ease-in-out 1.2s;
+  transition: .3s ease-in-out 1.2s;
+}
+
+/* INVOICE GENERATED */
+#invoice-generated h2 {
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+.invoice-first-div {
+  display: flex;
+}
+
+.invoice-first-div img {
+  margin-top: 3%;
+  width: 30%;
+  height: 65%;
+}
+
+.invoice-details {
+  font-size: 3em;
+}
+
+.bill_to_div,
+.po_details_div {
+  margin-top: 7%;
+}
+
+.line {
+  /* margin-top: 3%; */
+  height: 2px;
+  width: 100%;
+  background-color: #000;
+}
+
+.item_details_div {
+  margin-top: 2%;
+}
+
+.invoice-last-div {
+  margin-top: 30%;
+}
+
+.invoice-last-div p {
+  text-align: right;
+}
+
+.invoice-last-div h5 {
+  text-align: center;
+}
+
+
+.download-icon-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.download-icon {
+  cursor: pointer;
+  width: 50px;
+}
+
+.trash-icon,
+.fa-plus-circle {
+  cursor: pointer;
+  color: #ff5722;
+}
+
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  height: 2.4375em !important;
+}
+
+.invoice-map-details-row {
+  margin-top: 20px !important;
+}
+
+.invoice-amount {
+  position: relative;
+  right: 0;
+  left: 0;
+  margin: auto auto auto 80%;
 }
