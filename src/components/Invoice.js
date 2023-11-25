@@ -39,10 +39,25 @@ function Invoice() {
           total_amount: totalAmount,
         };
       } else {
-        return {
-          ...prevData,
-          [name]: value,
-        };
+        if (
+          name === "bill_to_1" ||
+          name === "bill_to_2" ||
+          name === "bill_to_3"
+        ) {
+          const updatedBillTo = [...prevData.bill_to];
+          const fieldIndex = Number(name.split("_")[2]); // Extract the index from the field name
+          updatedBillTo[fieldIndex - 1] = value; // Adjust the index to be 0-based
+
+          return {
+            ...prevData,
+            bill_to: updatedBillTo,
+          };
+        } else {
+          return {
+            ...prevData,
+            [name]: value,
+          };
+        }
       }
     });
   };
@@ -95,6 +110,16 @@ function Invoice() {
     }));
   };
 
+  const [visibleBillToFields, setVisibleBillToFields] = useState(1);
+
+  const handleBillToEnterKey = (e) => {
+    if (e.key === "Enter") {
+      // Increase the visible bill_to fields up to a maximum of 3
+      const nextVisibleFields = Math.min(visibleBillToFields + 1, 3);
+      setVisibleBillToFields(nextVisibleFields);
+    }
+  };
+
   return (
     <div id="invoice-generated">
       <div style={{ display: "flex" }}>
@@ -127,18 +152,26 @@ function Invoice() {
           </div>
 
           <form>
-            <div className="bill_to_div px-5 ">
+            <div className="bill_to_div px-5">
               <p>
                 Bill To <br />
-                <TextField
-                  id="bill_to"
-                  type="text"
-                  variant="standard"
-                  InputProps={{ disableUnderline: true }}
-                  name="bill_to"
-                  value={formData.bill_to}
-                  onChange={(e) => handleInputChange(undefined, e)}
-                />
+                {[1, 2, 3].map(
+                  (fieldIndex) =>
+                    fieldIndex <= visibleBillToFields && (
+                      <React.Fragment key={`bill_to_${fieldIndex}`}>
+                        <TextField
+                          id={`bill_to_${fieldIndex}`}
+                          type="text"
+                          variant="standard"
+                          name={`bill_to_${fieldIndex}`}
+                          value={formData.bill_to[fieldIndex - 1] || ""}
+                          onChange={(e) => handleInputChange(undefined, e)}
+                          onKeyDown={(e) => handleBillToEnterKey(e)}
+                        />
+                        <br />
+                      </React.Fragment>
+                    )
+                )}
               </p>
             </div>
             <br />
@@ -222,10 +255,6 @@ function Invoice() {
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
-            </div>
-
-            <div className="line"></div>
-            <div className="row item_details_div px-5 ">
               <div className="col">
                 Lot No.
                 <br />
@@ -239,7 +268,19 @@ function Invoice() {
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
-              <div className="invoice-amount col">
+            </div>
+
+            <div className="line"></div>
+            <div className="row item_details_div px-5">
+              <div className="col">
+                <span className="plus-icon" onClick={handleAddItem}>
+                  <i className="fas fa-plus-circle"></i>
+                </span>
+                Description
+              </div>
+              <div className="col">Quantity</div>
+              <div className="col">Price Each</div>
+              <div className="col">
                 Amount <br />
                 <TextField
                   id="amount"
@@ -250,59 +291,48 @@ function Invoice() {
                   value={`$${formData.total_amount || ""}`}
                 />
               </div>
+            </div>
+            <div className="row item_details_div px-5">
               {formData.items.map((item, index) => (
-                <div className="row mt-3">
+                <div className="row">
                   <div className="col">
-                    {index === 0 && (
-                      <span className="plus-icon" onClick={handleAddItem}>
-                        <i className="fas fa-plus-circle"></i>
-                      </span>
-                    )}
-                    Description
-                    <br />
                     <TextField
                       id="description"
                       variant="standard"
                       type="text"
-                      InputProps={{ disableUnderline: true }}
                       name="description"
                       value={item.description}
                       onChange={(e) => handleInputChange(index, e)}
                     />
                   </div>
                   <div className="col">
-                    Quantity
-                    <br />
                     <TextField
                       id="quantity"
                       variant="standard"
                       type="number"
-                      InputProps={{ disableUnderline: true }}
                       name="quantity"
                       value={item.quantity}
                       onChange={(e) => handleInputChange(index, e)}
                     />
                   </div>
                   <div className="col">
-                    Price Each
-                    <br />
                     <TextField
                       id="price_each"
                       variant="standard"
                       type="text"
-                      InputProps={{ disableUnderline: true }}
                       name="price_each"
                       value={item.price_each}
                       onChange={(e) => handleInputChange(index, e)}
                     />
                   </div>
+                  <div className="col">&nbsp;</div>
                 </div>
               ))}
 
-              <div className="col invoice-last-div px-5">
+              <div className="invoice-last-div ">
                 <p>
-                  Total Due &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                  &nbsp;
+                  <span>Total Due</span> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                  &nbsp; &nbsp; &nbsp;
                   <TextField
                     id="total_due"
                     variant="standard"

@@ -71,7 +71,12 @@ function InvoiceGenerated() {
           <div className="bill_to_div px-5 ">
             <p>
               Bill To <br />
-              {formData.bill_to}
+              {formData.bill_to.map((field, index) => (
+            <React.Fragment key={`bill_to_${index}`}>
+              {field}
+              <br />
+            </React.Fragment>
+          ))}
             </p>
           </div>
 
@@ -151,14 +156,14 @@ function InvoiceGenerated() {
             <div className="col">
               Amount
               <br />
-              {formData.invoice?.total_amount}
+              $ {formData.invoice?.total_amount}
             </div>
           </div>
 
           <div className="invoice-last-div px-5">
             <p>
               Total Due &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-              {formData.invoice?.total_amount}
+              $ {formData.invoice?.total_amount}
             </p>
             <h5>Thank You! We truly appreciate your business!</h5>
           </div>

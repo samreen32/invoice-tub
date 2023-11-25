@@ -4,7 +4,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [formData, setFormData] = useState({
-    bill_to: "",
+    bill_to: [""],
     PO_number: "",
     PO_date: "",
     type_of_work: "",
