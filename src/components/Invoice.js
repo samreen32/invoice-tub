@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import React, { useEffect, useState } from "react";
 import { UserLogin } from "../context/AuthContext";
 import logo from "../assets/img/logo.png";
 import TextField from "@mui/material/TextField";
@@ -8,12 +6,13 @@ import { useNavigate } from "react-router";
 import { INVOICE } from "../Auth_API";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { GrNext } from "react-icons/gr";
 
 function Invoice() {
   let navigate = useNavigate();
   const { formData, setFormData } = UserLogin();
-  const [invoiceGenerated, setInvoiceGenerated] = useState(false);
+  const [visibleBillToFields, setVisibleBillToFields] = useState(1);
+  const [focusedField, setFocusedField] = useState(null);
+  // const [invoiceGenerated, setInvoiceGenerated] = useState(false);
 
   /* Input field validation */
   const handleInputChange = (index, e) => {
@@ -45,8 +44,8 @@ function Invoice() {
           name === "bill_to_3"
         ) {
           const updatedBillTo = [...prevData.bill_to];
-          const fieldIndex = Number(name.split("_")[2]); // Extract the index from the field name
-          updatedBillTo[fieldIndex - 1] = value; // Adjust the index to be 0-based
+          const fieldIndex = Number(name.split("_")[2]);
+          updatedBillTo[fieldIndex - 1] = value;
 
           return {
             ...prevData,
@@ -110,15 +109,24 @@ function Invoice() {
     }));
   };
 
-  const [visibleBillToFields, setVisibleBillToFields] = useState(1);
-
-  const handleBillToEnterKey = (e) => {
+  /* Press enter key to add new field as well as key focus */
+  const handleBillToEnterKey = (e, fieldIndex) => {
     if (e.key === "Enter") {
-      // Increase the visible bill_to fields up to a maximum of 3
       const nextVisibleFields = Math.min(visibleBillToFields + 1, 3);
       setVisibleBillToFields(nextVisibleFields);
+      setFocusedField(nextVisibleFields - 1);
+      e.preventDefault();
     }
   };
+
+  useEffect(() => {
+    if (focusedField !== null) {
+      const inputRef = document.getElementById(`bill_to_${focusedField + 1}`);
+      if (inputRef) {
+        inputRef.focus();
+      }
+    }
+  }, [focusedField]);
 
   return (
     <div id="invoice-generated">
@@ -146,6 +154,7 @@ function Invoice() {
                 onClick={handleCreateInvoice}
                 style={{ float: "right", cursor: "pointer" }}
               >
+                {/* Go to next page to check your invoice */}
                 <i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
               </span>
             </div>
@@ -166,7 +175,7 @@ function Invoice() {
                           name={`bill_to_${fieldIndex}`}
                           value={formData.bill_to[fieldIndex - 1] || ""}
                           onChange={(e) => handleInputChange(undefined, e)}
-                          onKeyDown={(e) => handleBillToEnterKey(e)}
+                          onKeyDown={(e) => handleBillToEnterKey(e, fieldIndex)}
                         />
                         <br />
                       </React.Fragment>
@@ -276,25 +285,15 @@ function Invoice() {
                 <span className="plus-icon" onClick={handleAddItem}>
                   <i className="fas fa-plus-circle"></i>
                 </span>
-                Description
+                &nbsp; Description
               </div>
               <div className="col">Quantity</div>
               <div className="col">Price Each</div>
-              <div className="col">
-                Amount <br />
-                <TextField
-                  id="amount"
-                  variant="standard"
-                  type="text"
-                  InputProps={{ disableUnderline: true }}
-                  readonly
-                  value={`$${formData.total_amount || ""}`}
-                />
-              </div>
+              <div className="col">Amount</div>
             </div>
             <div className="row item_details_div px-5">
               {formData.items.map((item, index) => (
-                <div className="row">
+                <div className="row" style={{ marginTop: "-25px" }}>
                   <div className="col">
                     <TextField
                       id="description"
@@ -313,6 +312,7 @@ function Invoice() {
                       name="quantity"
                       value={item.quantity}
                       onChange={(e) => handleInputChange(index, e)}
+                      style={{ width: "50%" }}
                     />
                   </div>
                   <div className="col">
@@ -323,9 +323,21 @@ function Invoice() {
                       name="price_each"
                       value={item.price_each}
                       onChange={(e) => handleInputChange(index, e)}
+                      style={{ width: "50%" }}
                     />
                   </div>
-                  <div className="col">&nbsp;</div>
+                  <div className="col my-2">
+                    <TextField
+                      id="amount"
+                      variant="standard"
+                      type="text"
+                      InputProps={{ disableUnderline: true }}
+                      readonly
+                      value={`${"    "}$ ${
+                        (item.quantity || 0) * (item.price_each || 0)
+                      }`}
+                    />
+                  </div>
                 </div>
               ))}
 
@@ -339,7 +351,7 @@ function Invoice() {
                     type="text"
                     InputProps={{ disableUnderline: true }}
                     readonly
-                    value={`$${formData.total_amount || ""}`}
+                    value={`$ ${formData.total_amount || ""}`}
                   />
                 </p>
               </div>

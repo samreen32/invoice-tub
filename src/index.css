@@ -53,7 +53,7 @@ input {
   cursor: pointer;
 }
 
-button {
+.invoice-btn {
   cursor: pointer;
   display: inline-block;
   width: 250px;
@@ -191,3 +191,74 @@ h3 {
   left: 0;
   margin: auto auto auto 80%;
 }
+
+.add-container,
+.download-icon-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.download-icon-container svg {
+  width: 100% !important;
+  height: 10% !important;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.download-icon {
+  cursor: pointer;
+  width: 110px;
+}
+
+.new-invoice-btn {
+  cursor: pointer;
+  background-color: #673ab7;
+  color: white;
+  padding: 12px;
+}
+
+.css-mnn31 {
+  height: 2.75em !important;
+}
+
+/* Recieve Payment */
+.card {
+  width: 550px;
+  padding: 10px;
+  border-radius: 20px;
+  background: orange;
+  border: none;
+  color: #fff;
+  height: 350px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.card h1 {
+  font-size: 48px;
+  margin-bottom: 0px;
+}
+
+.card span {
+  font-size: 28px;
+}
+
+.image {
+  position: absolute;
+  opacity: .1;
+  left: 0;
+  top: 0;
+}
+
+.image2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: .1;
+}
+
+/* .modal-open {
+  overflow: auto;
+} */

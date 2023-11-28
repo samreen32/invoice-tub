@@ -3,8 +3,10 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { UserLogin } from "../context/AuthContext";
 import logo from "../assets/img/logo.png";
+import { useNavigate } from "react-router";
 
 function InvoiceGenerated() {
+  let navigate = useNavigate();
   const { formData } = UserLogin();
   const [invoiceGenerated, setInvoiceGenerated] = useState(false);
 
@@ -28,10 +30,30 @@ function InvoiceGenerated() {
 
   return (
     <div id="invoice-generated">
-      <div style={{ display: "flex" }}>
-        <h2>Invoice Details</h2>
-        <button onClick={generatePDF}>Generate PDF</button>
+      <div className="row">
+        <div className="col-3" style={{ marginTop: "40px" }}>
+          <div className="add-container">
+            <span
+              onClick={() => {
+                navigate("/");
+              }}
+              className="new-invoice-btn"
+            >
+              Generate new invoice
+            </span>
+          </div>
+        </div>
+        <div className="col-6">
+          <h2>Invoice Details</h2>
+        </div>
+        <div className="col-3" style={{ marginTop: "50px" }}>
+          <span onClick={generatePDF} className="new-invoice-btn">
+            Save the PDF
+            {/* <i class="fa fa-download fa-2x" aria-hidden="true"></i> */}
+          </span>
+        </div>
       </div>
+
       <div className="container px-5 py-5" style={{ width: "100%" }}>
         <div id="pdf">
           <div className="row">
@@ -72,11 +94,11 @@ function InvoiceGenerated() {
             <p>
               Bill To <br />
               {formData.bill_to.map((field, index) => (
-            <React.Fragment key={`bill_to_${index}`}>
-              {field}
-              <br />
-            </React.Fragment>
-          ))}
+                <React.Fragment key={`bill_to_${index}`}>
+                  {field}
+                  <br />
+                </React.Fragment>
+              ))}
             </p>
           </div>
 
@@ -156,14 +178,21 @@ function InvoiceGenerated() {
             <div className="col">
               Amount
               <br />
-              $ {formData.invoice?.total_amount}
+              {formData.items.map((item, index) => (
+                <span key={index}>
+                  {`${"    "}$ ${
+                    (item.quantity || 0) * (item.price_each || 0)
+                  }`}
+                  <br />
+                </span>
+              ))}
             </div>
           </div>
 
           <div className="invoice-last-div px-5">
             <p>
-              Total Due &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-              $ {formData.invoice?.total_amount}
+              Total Due &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; ${" "}
+              {formData.invoice?.total_amount}
             </p>
             <h5>Thank You! We truly appreciate your business!</h5>
           </div>

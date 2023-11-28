@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [invoiceDetails, setInvoiceDetails] = useState(null);
   const [formData, setFormData] = useState({
     bill_to: [""],
     PO_number: "",
@@ -18,7 +19,6 @@ const AuthProvider = ({ children }) => {
         quantity: "",
         price_each: "",
       },
-     
     ],
     invoice: {
       invoice_num: null,
@@ -30,6 +30,8 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        invoiceDetails,
+        setInvoiceDetails,
         formData,
         setFormData,
       }}
