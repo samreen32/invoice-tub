@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { UserLogin } from "../context/AuthContext";
-import logo from "../assets/img/logo.png";
+import { UserLogin } from "../../context/AuthContext";
+import logo from "../../assets/img/logo.png";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router";
-import { INVOICE } from "../Auth_API";
+import { INVOICE } from "../../Auth_API";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-function Invoice() {
+function InvoiceForm() {
   let navigate = useNavigate();
   const { formData, setFormData } = UserLogin();
   const [visibleBillToFields, setVisibleBillToFields] = useState(1);
@@ -66,7 +66,7 @@ function Invoice() {
     try {
       const response = await axios.post(`${INVOICE}`, formData);
       console.log("Invoice created successfully:", response.data);
-      navigate(`/InvoiceGenerated`);
+      navigate(`/invoice_generated`);
       setFormData((prevData) => ({
         ...prevData,
         invoice: {
@@ -363,4 +363,4 @@ function Invoice() {
   );
 }
 
-export default Invoice;
+export default InvoiceForm;

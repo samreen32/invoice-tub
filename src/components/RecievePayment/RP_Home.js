@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
+import { TextField } from "@mui/material";
 import axios from "axios";
 import { GET_INVOICE } from "../../Auth_API";
 import { UserLogin } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function RP_Home() {
-  const [modalVisible, setModalVisible] = useState(true);
   let navigate = useNavigate();
   const { setInvoiceDetails } = UserLogin();
   const [credentials, setCredentials] = useState({
@@ -33,7 +33,7 @@ export default function RP_Home() {
       });
       document.body.style.overflow = "auto";
 
-      navigate("/invoice_form");
+      navigate("/view_invoice");
     } catch (error) {
       console.error("Error fetching invoice details:", error.message);
     }
@@ -42,30 +42,29 @@ export default function RP_Home() {
   return (
     <div style={{ marginTop: "10%" }}>
       <div class="d-flex justify-content-center align-items-center">
-        <div class="d-flex card text-center">
-          <div class="image">
-            <img
-              src="https://icons-for-free.com/iconfiles/png/512/dollar+funds+hand+payment+icon+icon-1320086640827007356.png"
-              width="150"
-            />
-          </div>
-          <div class="image2">
-            <img
-              src="https://cdn.icon-icons.com/icons2/1138/PNG/512/1486395310-14-payment_80577.png"
-              width="150"
-            />
-          </div>
-          <h1>Recieve Payment</h1>
-          <div class="mt-4">
-            <small>
-              <button
-                className="invoice-btn"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Recieve
-              </button>
-            </small>
+        <div class="d-flex text-center">
+          <div class="ag-format-container">
+            <div class="ag-courses_box">
+              <div class="ag-courses_item">
+                <Link to="/invoice" class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+
+                  <div class="ag-courses-item_title">Generate Invoice</div>
+                  <div class="ag-courses-item_date-box">Generate</div>
+                </Link>
+              </div>
+              <div class="ag-courses_item">
+                <Link
+                  class="ag-courses-item_link"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">Recieve Payment</div>
+                  <div class="ag-courses-item_date-box">Recieve</div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

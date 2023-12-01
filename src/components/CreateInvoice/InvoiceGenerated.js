@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import { UserLogin } from "../context/AuthContext";
-import logo from "../assets/img/logo.png";
+import { UserLogin } from "../../context/AuthContext";
+import logo from "../../assets/img/logo.png";
 import { useNavigate } from "react-router";
 
 function InvoiceGenerated() {

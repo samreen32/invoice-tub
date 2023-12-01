@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../assets/img/logo.png";
 import { UserLogin } from "../../context/AuthContext";
 
-export default function Invoice_Form() {
+export default function ViewInvoice() {
   const { invoiceDetails } = UserLogin();
 
   return (
