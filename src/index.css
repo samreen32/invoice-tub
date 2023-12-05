@@ -358,3 +358,21 @@ h3 {
     font-size: 16px;
   }
 }
+
+.installer-container,
+.payment-recieve-container {
+  margin-top: 7%;
+}
+
+.css-pdct74-MuiTablePagination-selectLabel {
+  margin-top: 18px !important;
+}
+
+.css-levciy-MuiTablePagination-displayedRows {
+  margin-top: 18px;
+}
+
+.total_unpaid_invoices {
+  text-align: right;
+  margin-right: 14.1%;
+}

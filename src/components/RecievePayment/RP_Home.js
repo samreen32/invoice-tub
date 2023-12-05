@@ -64,6 +64,18 @@ export default function RP_Home() {
                   <div class="ag-courses-item_date-box">Recieve</div>
                 </Link>
               </div>
+              <div class="ag-courses_item">
+                <Link
+                  class="ag-courses-item_link"
+                  to="/unpaid_invoice_report"
+                >
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    Unpaid Invoice Report
+                  </div>
+                  <div class="ag-courses-item_date-box">View Report</div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
