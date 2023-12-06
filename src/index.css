@@ -376,3 +376,57 @@ h3 {
   text-align: right;
   margin-right: 14.1%;
 }
+
+.total_amount_invoices {
+  text-align: right;
+  margin-right: 6%;
+}
+
+/* Search field styling */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #F9F9FA;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s ease-in-out;
+  width: 250px;
+}
+
+.search-container.expanded {
+  width: 300px;
+}
+
+.search-form {
+  border-radius: 18px;
+  background-color: #F9F9FA;
+  height: 60px;
+  align-items: center;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 5px;
+  background-color: #F9F9FA;
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  /* margin-top: 8px; */
+  padding: 5px;
+}
+
+.search-button i {
+  color: #333;
+}
+
+.toolbar-search {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -20px;
+}

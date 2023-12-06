@@ -54,86 +54,33 @@ export default function RP_Home() {
                 </Link>
               </div>
               <div class="ag-courses_item">
-                <Link
-                  class="ag-courses-item_link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
+                <Link to="/invoice_report" class="ag-courses-item_link">
                   <div class="ag-courses-item_bg"></div>
-                  <div class="ag-courses-item_title">Recieve Payment</div>
-                  <div class="ag-courses-item_date-box">Recieve</div>
+                  <div class="ag-courses-item_title">View Invoices</div>
+                  <div class="ag-courses-item_date-box">View</div>
                 </Link>
               </div>
               <div class="ag-courses_item">
-                <Link
-                  class="ag-courses-item_link"
-                  to="/unpaid_invoice_report"
-                >
+                <Link class="ag-courses-item_link" to="/unpaid_invoice_report">
                   <div class="ag-courses-item_bg"></div>
-                  <div class="ag-courses-item_title">
-                    Unpaid Invoice Report
-                  </div>
+                  <div class="ag-courses-item_title">Unpaid Invoice Report</div>
                   <div class="ag-courses-item_date-box">View Report</div>
                 </Link>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- Modal --> */}
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Invoice Number
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              Enter Invoice Number
-              <TextField
-                // variant="standard"
-                placeholder="e.g. 8900"
-                name="invoice_num"
-                value={invoice_num}
-                type="text"
-                onChange={onChange}
-                margin="normal"
-                sx={{ width: "100%" }}
-                required
-                // error={error && !isValidEmail(email)}
-                // helperText={error && !isValidEmail(email) && "Enter a valid email!"}
-              />
-            </div>
-
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                onClick={handleInvoiceForm}
-              >
-                Done
-              </button>
+              <div class="ag-courses_item">
+                <Link to="/income_report" class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">View Income Report</div>
+                  <div class="ag-courses-item_date-box">View</div>
+                </Link>
+              </div>
+              <div class="ag-courses_item">
+                <Link to="/customer_report" class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">View Customer Report</div>
+                  <div class="ag-courses-item_date-box">View</div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
