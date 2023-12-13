@@ -131,7 +131,19 @@ function InvoiceForm() {
   return (
     <div id="invoice-generated">
       <div style={{ display: "flex" }}>
-        <h2>Please Enter your Invoice details</h2>
+        <h2>
+          <span
+            onClick={() => {
+              navigate("/");
+            }}
+            style={{ cursor: "pointer", marginLeft: "-40%" }}
+          >
+            <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+          </span>
+          <span style={{ cursor: "pointer", marginLeft: "40%" }}>
+            Please Enter your Invoice details
+          </span>
+        </h2>
       </div>
       <div
         className="container px-5 py-5"

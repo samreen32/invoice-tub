@@ -11,8 +11,10 @@ import axios from "axios";
 import { GET_ALL_INVOICES } from "../../Auth_API";
 import { UserLogin } from "../../context/AuthContext";
 import { Toolbar } from "@mui/material";
+import { useNavigate } from "react-router";
 
 export default function CustomerReport() {
+  let navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [invoices, setInvoices] = useState([]);
@@ -69,7 +71,17 @@ export default function CustomerReport() {
                 justifyContent: "center",
               }}
             >
-              Invoice Report
+              <span
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{ cursor: "pointer", marginLeft: "-40%" }}
+              >
+                <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+              </span>
+              <span style={{ cursor: "pointer", marginLeft: "40%" }}>
+                Customer Report
+              </span>
             </h2>
             {/* Search field */}
             <>

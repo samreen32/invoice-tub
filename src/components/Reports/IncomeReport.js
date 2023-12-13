@@ -62,7 +62,17 @@ export default function IncomeReport() {
                 justifyContent: "center",
               }}
             >
-              Income Report
+              <span
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{ cursor: "pointer", marginLeft: "-40%" }}
+              >
+                <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+              </span>
+              <span style={{ cursor: "pointer", marginLeft: "40%" }}>
+                Income Report
+              </span>
             </h2>
 
             <Paper sx={{ width: "100%", overflow: "hidden" }}>

@@ -9,9 +9,10 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { GET_UNPAID_INVOICES } from "../../Auth_API";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NonPayment_Report() {
+  let navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [invoices, setInvoices] = useState([]);
@@ -73,7 +74,17 @@ export default function NonPayment_Report() {
                 justifyContent: "center",
               }}
             >
-              Report of Unpaid Invoices
+              <span
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{ cursor: "pointer", marginLeft: "-33%" }}
+              >
+                <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+              </span>
+              <span style={{ cursor: "pointer", marginLeft: "33%" }}>
+                Unpaid Invoice Report
+              </span>
             </h2>
             <Paper sx={{ width: "100%", overflow: "hidden" }}>
               <TableContainer sx={{ maxHeight: 400 }}>

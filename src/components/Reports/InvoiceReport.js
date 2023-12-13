@@ -104,7 +104,18 @@ export default function InvoiceReport() {
                 justifyContent: "center",
               }}
             >
-              Invoice Report
+              <span
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{ cursor: "pointer", marginLeft: "-40%" }}
+              >
+                <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+              </span>
+              <span style={{ cursor: "pointer", marginLeft: "40%" }}>
+                {" "}
+                Invoice Report
+              </span>
             </h2>
             {/* Search field */}
             <>

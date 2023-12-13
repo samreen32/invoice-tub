@@ -71,7 +71,17 @@ export default function RecievePay_Invoice() {
   return (
     <div style={{ marginTop: "2%" }}>
       <h2 style={{ display: "flex", margin: "auto", justifyContent: "center" }}>
-        Recieve Payment
+        <span
+          onClick={() => {
+            navigate("/");
+          }}
+          style={{ cursor: "pointer", marginLeft: "-23%" }}
+        >
+          <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+        </span>
+        <span style={{ cursor: "pointer", marginLeft: "23%" }}>
+          Recieve Payment
+        </span>
       </h2>
       <div id="invoice-generated">
         <div className="container px-5 py-5" style={{ width: "100%" }}>
